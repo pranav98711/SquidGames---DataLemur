@@ -1,5 +1,8 @@
 # SQL Squid Game by Data Lemur Solutions - Pranav Sorte
 
+![image](https://github.com/user-attachments/assets/e6a665cd-aadc-45b3-b893-aa6516a61d3a)
+
+
 Link to the SQL Squid game and questions  -> https://datalemur.com/sql-game
 
 ## My Solutions:
