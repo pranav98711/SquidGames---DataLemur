@@ -51,7 +51,7 @@ order by avg(average_completion_time )
    ```</code> </pre> 
    
 ## Level 4
-To identify Player 456's closest companion in the Marbles game, I needed to analyze interaction data from the daily_interactions table. Since Player 456 could appear as either player1_id or player2_id in the records, I planned to capture all interactions involving Player 456 from both perspectives. After consolidating these interactions, I aggregated the counts to find the player with the highest total interactions. To ensure this player is still relevant, I verified their status as alive using the player table. Finally, I retrieved the first names of both Player 456 and their closest companion, along with the total number of interactions they shared. This step-by-step approach ensures comprehensive and accurate identification of Player 456’s closest companion.
+To analyze and rank the teams for the Tug of War game, I first needed to focus on teams with exactly 10 players, as specified in the task. This required filtering the player table for alive players with valid team_ids and grouping them by team_id to count their members. After identifying the eligible teams, I calculated their average player age. Next, I categorized these teams into three age groups based on their average age: 'Fit' for teams under 40, 'Grizzled' for ages between 40 and 50, and 'Elderly' for teams over 50. Finally, I ranked the teams in descending order of average age, with the highest average age assigned rank 1. This approach ensures that the Front Man receives a clear, ranked demographic analysis for strategic planning.
 
 <pre> <code>```
 -- Identify teams with exactly 10 alive players and calculate their average age      
