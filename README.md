@@ -1,6 +1,7 @@
 # SQL Squid Game by Data Lemur Solutions - Pranav Sorte
 
-![image](https://github.com/user-attachments/assets/e6a665cd-aadc-45b3-b893-aa6516a61d3a)
+![image](https://github.com/user-attachments/assets/e9c6b915-76aa-4e3d-b04b-356d3c978001)
+
 
 
 Link to the SQL Squid game and questions  -> https://datalemur.com/sql-game
