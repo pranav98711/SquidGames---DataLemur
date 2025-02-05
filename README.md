@@ -237,10 +237,52 @@ select * , avg(last_moved_time_seconds) over (partition by id)
   where game_id = (select game_id from pushed_player_high_game)
   and lower(death_description) like '%push%'
   order by avg(last_moved_time_seconds) over (partition by id) desc
-  limit 1
-  
+  limit 1  
 )
 select id as player_id,	first_name,	last_name, 
 floor(avg) as	hesitation_time from high_player 
 
+  ```</code> </pre>
+
+
+
+## Level 9
+The initial approach focuses on identifying the timeframe of the disappearance by retrieving the latest Squid Game schedule. Next, we determine which guards were active during this period based on their shift timings. We then analyze door access logs to identify guards who deviated from their assigned posts during their shifts. Finally, we pinpoint potential associates by checking for other guards who accessed the "upper management" area within the critical disappearance window, excluding the main suspect. This structured process helps narrow down suspicious activities and potential accomplices efficiently.
+
+<pre> <code>```sql 
+with disapp_timeframe as (
+    select start_time,date,end_time
+    from game_schedule
+    where type='Squid Game'
+    order by date desc
+    limit 1
+),activeGuards as (
+    select a.id as guard_id,a.shift_start,a.assigned_post,a.shift_end
+    from guard a
+    join disapp_timeframe b
+    on b.end_time>a.shift_start and b.start_time<a.shift_end
+),
+guard_access_logs as (
+    select a.guard_id,a.door_location,a.access_time
+    from daily_door_access_logs a
+    join activeGuards b 
+    on a.guard_id=b.guard_id
+    where a.access_time between b.shift_start and b.shift_end
+),
+guards_out_of_post as (
+    select a.guard_id,a.assigned_post,a.shift_start,a.shift_end,b.door_location,b.access_time
+    from activeGuards a
+    left join guard_access_logs b 
+    on a.guard_id=b.guard_id
+    where a.assigned_post!=b.door_location
+),potential_asso as (
+    select g.id as associate_guard_id,dal.access_time as access_time
+	from daily_door_access_logs dal
+    join guard g 
+    on g.id = dal.guard_id
+    where dal.door_location = 'Upper Management'
+        and dal.access_time between '11:00:00'::time and '12:00:00'::time
+        and g.id != 31
+)
+SELECT * FROM potential_asso;
   ```</code> </pre>
