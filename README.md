@@ -2,12 +2,34 @@
 
 ![image](https://github.com/user-attachments/assets/e9c6b915-76aa-4e3d-b04b-356d3c978001)
 
+🚀I’m Excited to Announce I Got Selected by the Squid Game Organization for a Data Challenge!
+
+Okay, not literally… I’m still alive and not wearing a green tracksuit (phew). 😅
+
+But solving the SQL Squid Game Challenge by Data Lemur felt like I was competing for my life, minus the actual life-or-death stakes (just me battling complex queries and the occasional existential crisis). The challenge threw me into intense, high-stakes scenarios where I had to analyze complex data models, understand relationships between tables, identify key insights, optimize resources, and make data-driven decisions - all through advance SQL queries.
+
+What started as a fun exercise quickly turned into a deep dive into real-world data problems: analyzing player behaviors, resource allocation, team dynamics, performance monitoring and more. Each query tested my analytical thinking and SQL.
+
+Key Learnings:
+- Mastered JOINs, CTEs, window functions, case statements and conditional logics (SQL is new my best friend)
+- Analyzed gameplay patterns, resource distribution, and collaborative performance metrics to deliver actionable insights (without anyone getting eliminated)
+- Optimized solutions for real-time scenarios, ensuring accuracy, efficiency, and scalability
+- Translated raw data into meaningful business decisions, a crucial skill for impactful data storytelling
+
+Eager to apply these skills in real-world scenarios across industries like finance, healthcare, e-commerce, sports analytics, technology, energy, supply chain, telecommunications, aviation, media & entertainment, government, real estate, automotive, environmental sustainability, and education
+
+It was a fun, data-driven adventure mixing logic, strategy, and a bit of "dark humor" 😄. Check out my solutions below
 
 
+___
+<br>
 Link to the SQL Squid game and questions  -> https://datalemur.com/sql-game
+
 
 ## My Solutions:
 ## Level 1
+## Question -> https://datalemur.com/sql-game/level1.html
+
 To identify vulnerable living players, I focused on filtering the player table for those who are alive and in severe debt (debt > 400,000,000 won). Next, I applied additional conditions to target players who are either elderly (age > 65) or have a Gambling vice with no close family connections, as these factors indicate higher susceptibility to manipulation. Using logical operators (AND, OR), I structured the query to capture players meeting all the criteria accurately
 ```sql
 select * from player
@@ -18,6 +40,7 @@ or (vice = 'Gambling' and has_close_family = false))
    ```
    
 ## Level 2
+## Question -> https://datalemur.com/sql-game/level2.html
 To determine the number of food rations required to feed 90% of the remaining (alive) non-insider players, I first needed to filter the player table for players who are alive and not insiders. Once I had this subset, I calculated 90% of the total count using the FLOOR() function to round the number down to ensure we're not overestimating the rations. Next, I compared this required number of rations against the current ration supply from the rations table. Using a CASE statement, I checked if the available rations were sufficient (i.e., if the supply was greater than or equal to the calculated need), returning TRUE or FALSE accordingly. This approach provides both the exact number of rations needed and a quick sufficiency check to support resource optimization.
 
 
@@ -32,6 +55,7 @@ where isinsider = false and status='alive'
    ```
    
 ## Level 3
+## Question -> https://datalemur.com/sql-game/level3.html
 To analyze how seasonal variations affect player performance in the Honeycomb game, I focused on comparing data from two contrasting months: August (hot summer) and January (cold winter). The first step was to filter the honeycomb_game table for records from these months within the last 20 years, ensuring the data is both relevant and recent. After filtering, I grouped the data by both the shape of the honeycomb and the month to compare average completion times across different conditions. Finally, I calculated the average completion time for each group to identify patterns in performance based on seasonal temperatures. Sorting the results by average completion time helps highlight which shapes and seasons affect performance the most.
 
 ```sql
@@ -51,6 +75,7 @@ order by avg(average_completion_time )
    ```
    
 ## Level 4
+## Question -> https://datalemur.com/sql-game/level4.html
 To analyze and rank the teams for the Tug of War game, I first needed to focus on teams with exactly 10 players, as specified in the task. This required filtering the player table for alive players with valid team_ids and grouping them by team_id to count their members. After identifying the eligible teams, I calculated their average player age. Next, I categorized these teams into three age groups based on their average age: 'Fit' for teams under 40, 'Grizzled' for ages between 40 and 50, and 'Elderly' for teams over 50. Finally, I ranked the teams in descending order of average age, with the highest average age assigned rank 1. This approach ensures that the Front Man receives a clear, ranked demographic analysis for strategic planning.
 
 ```sql
@@ -75,6 +100,7 @@ from teamAge_category
    ```
    
 ## Level 5
+## Question -> https://datalemur.com/sql-game/level5.html
 To identify Player 456's closest companion in the Marbles game, I needed to analyze interaction data from the daily_interactions table. Since Player 456 could appear as either player1_id or player2_id in the records, I planned to capture all interactions involving Player 456 from both perspectives. After consolidating these interactions, I aggregated the counts to find the player with the highest total interactions. To ensure this player is still relevant, I verified their status as alive using the player table. Finally, I retrieved the first names of both Player 456 and their closest companion, along with the total number of interactions they shared. This step-by-step approach ensures comprehensive and accurate identification of Player 456’s closest companion.
 
 ```sql
@@ -118,6 +144,7 @@ cross join player_456_details b
 
 
 ## Level 6
+## Question -> https://datalemur.com/sql-game/level6.html
 To identify the game type with the highest number of equipment failures and the supplier responsible for most of these failures, I planned the solution in several steps. First, I needed to join the equipment and failure_incidents tables to track which equipment has failed and when. Then, I grouped the data by game_type to count failures and determine which game had the most issues. Once the most faulty game type was identified, I focused on finding the supplier with the highest number of failures within that game. Finally, to evaluate equipment durability, I calculated the average lifespan until the first failure for all equipment from this supplier, converting the duration from days to whole years based on 365.2425 days per year. This structured approach ensured all required insights were derived systematically.
 
 ```sql
@@ -175,7 +202,7 @@ select * from avg_date
 
    ```
 ## Level 7
-
+## Question -> https://datalemur.com/sql-game/level7.html
 To identify guards who were missing from their sleeping quarters during off-duty hours, I first recognized the need to join data from the guard, room, and camera tables to correlate guard assignments, room occupancy status, and movement detections. The key was to focus on rooms marked as vacant (isVacant = true) to flag guards who were not in their assigned quarters. I also needed to capture details of when and where these guards were last seen outside their rooms, along with calculating the time between their last check-in and when they were spotted. Additionally, to provide a comprehensive report, I calculated the time range between the first and last detection of any guard, giving context to the overall activity patterns. The final output includes all required guard details, sorted by guard ID for clarity.
 
 ```sql
@@ -214,6 +241,7 @@ order by guard_id
    
    
 ## Level 8
+## Question -> https://datalemur.com/sql-game/level8.html
 To solve this, I first needed to combine game and player data by joining the `glass_bridge` and `player` tables, ensuring all relevant details were accessible. The next step was to identify the game with the highest average hesitation time before a push, which I achieved by filtering for players who died due to being pushed and using window functions to calculate average hesitation times per game. After identifying this game, I focused on players within it, again filtering for those pushed off and determining which player had the highest hesitation time. I also accounted for data inconsistencies by applying case-insensitive filters to ensure accurate results.
 
 ```sql
@@ -248,6 +276,7 @@ floor(avg) as	hesitation_time from high_player
 
 
 ## Level 9
+## Question -> https://datalemur.com/sql-game/level9.html
 The initial approach focuses on identifying the timeframe of the disappearance by retrieving the latest Squid Game schedule. Next, we determine which guards were active during this period based on their shift timings. We then analyze door access logs to identify guards who deviated from their assigned posts during their shifts. Finally, we pinpoint potential associates by checking for other guards who accessed the "upper management" area within the critical disappearance window, excluding the main suspect. This structured process helps narrow down suspicious activities and potential accomplices efficiently.
 
 ```sql
